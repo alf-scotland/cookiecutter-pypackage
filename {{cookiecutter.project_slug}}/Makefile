@@ -46,6 +46,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -f .coverage
 	rm -fr htmlcov/
 	rm -fr .pytest_cache
+	rm -fr .mypy_cache
 
 lint: ## check style with flake8
 	flake8 {{ cookiecutter.project_slug }} tests
@@ -56,6 +57,9 @@ test: ## run tests quickly with the default Python
 {%- else %}
 	python setup.py test
 {%- endif %}
+
+test-typing: ## run mypy type checking
+	mypy {{ cookiecutter.project_slug }}
 
 test-all: ## run tests on every Python version with tox
 	tox
